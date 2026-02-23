@@ -1,0 +1,7 @@
+cJSON aims to be the dumbest possible parser that you can get your job done
+with. It's a single file of C, and a single header file.
+
+It's like XML, but fat-free. You use it to move data around, store things, or
+just generally represent your program's state.
+
+URL: https://github.com/DaveGamble/cJSON
