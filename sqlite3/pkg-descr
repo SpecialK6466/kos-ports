@@ -1,0 +1,10 @@
+SQLite is a self-contained, serverless, zero-configuration, transactional SQL
+database engine. It is the most widely deployed SQL database engine in the
+world. The source code for SQLite is in the public domain. Useful for local
+save data, configuration storage, and structured data on Dreamcast homebrew
+projects.
+
+This port uses the amalgamation build (single sqlite3.c file) with threading
+and dynamic extension support disabled for the Dreamcast environment.
+
+URL: https://www.sqlite.org/
