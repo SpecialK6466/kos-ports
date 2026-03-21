@@ -1,0 +1,9 @@
+libpsl is a C library for the Public Suffix List (PSL). The PSL is a list of
+domain name suffixes under which internet users can directly register domain
+names, maintained by Mozilla at publicsuffix.org. It is widely used by
+browsers and HTTP clients to enforce cookie scoping and same-origin policies.
+
+This KOS port compiles the built-in DAFSA-encoded PSL data from the release
+tarball, requiring no external data files or Unicode libraries at runtime.
+
+URL: https://rockdaboot.github.io/libpsl
