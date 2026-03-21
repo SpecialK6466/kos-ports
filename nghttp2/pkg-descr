@@ -1,0 +1,11 @@
+nghttp2 is a C implementation of the HTTP/2 framing layer (RFC 7540 / RFC 9113).
+The library provides a session-oriented, callback-driven API for encoding and
+decoding HTTP/2 frames, HPACK header compression, and flow-control accounting.
+It performs no I/O itself — all network operations are delegated to the caller
+via send/receive callbacks, making it well-suited for embedded targets.
+
+This KOS port builds the core library only (lib/), with no external dependencies
+beyond the standard C library. It is used by cURL to enable HTTP/2 multiplexing
+over the Dreamcast's Broadband Adapter or modem connection.
+
+URL: https://nghttp2.org
