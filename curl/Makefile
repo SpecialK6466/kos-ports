@@ -10,7 +10,7 @@ SHORT_DESC =        A library for transferring data with URL syntax.
 PORT_BUILD =        cmake
 
 # Provide SSL support library
-DEPENDENCIES =      zlib mbedtls
+DEPENDENCIES =      zlib mbedtls zstd libpsl brotli nghttp2
 
 # What files we need to download, and where from.
 DOWNLOAD_SITE  =    https://curl.se/download
@@ -36,11 +36,20 @@ CMAKE_ARGS =        -DCURL_USE_MBEDTLS=ON \
                     -DBUILD_SHARED_LIBS=OFF \
                     -DBUILD_STATIC_LIBS=ON \
                     -DBUILD_TESTING=OFF \
-                    -DCURL_USE_LIBPSL=OFF \
+                    -DCURL_USE_LIBPSL=ON \
+                    -DLIBPSL_INCLUDE_DIR=${KOS_PORTS}/include/libpsl \
+                    -DLIBPSL_LIBRARY=${KOS_PORTS}/lib/libpsl.a \
                     -DCURL_USE_LIBSSH2=OFF \
-                    -DCURL_BROTLI=OFF \
-                    -DCURL_ZSTD=OFF \
-                    -DUSE_NGHTTP2=OFF \
+                    -DCURL_BROTLI=ON \
+                    -DBROTLI_INCLUDE_DIR=${KOS_PORTS}/include \
+                    -DBROTLIDEC_LIBRARY=${KOS_PORTS}/lib/libbrotli.a \
+                    -DBROTLICOMMON_LIBRARY=${KOS_PORTS}/lib/libbrotli.a \
+                    -DCURL_ZSTD=ON \
+                    -DZstd_INCLUDE_DIR=${KOS_PORTS}/include/zstd \
+                    -DZstd_LIBRARY=${KOS_PORTS}/lib/libzstd.a \
+                    -DUSE_NGHTTP2=ON \
+                    -DNGHTTP2_INCLUDE_DIR=${KOS_PORTS}/include \
+                    -DNGHTTP2_LIBRARY=${KOS_PORTS}/lib/libnghttp2.a \
                     -DCMAKE_POLICY_VERSION_MINIMUM=3.7 \
                     -DHAVE_SCHED_YIELD=0
 
