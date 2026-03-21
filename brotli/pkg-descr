@@ -1,0 +1,9 @@
+Brotli is a generic-purpose lossless compression algorithm developed by Google.
+It combines a modern variant of LZ77, Huffman coding, and 2nd-order context
+modelling to achieve compression ratios comparable to the best general-purpose
+methods available, while remaining fast to decompress.
+
+This KOS port builds the complete library: common (c/common/), decoder
+(c/dec/), and encoder (c/enc/).
+
+URL: https://github.com/google/brotli
