@@ -13,7 +13,7 @@ ifeq ($(PORT_BUILD), autotools)
 	else \
 		cd build/${DISTFILE_DIR} ; \
 	fi ; \
-	CC=kos-cc ${CONFIGURE_DEFS} ./configure --prefix=${KOS_PORTS}/${PORTNAME}/inst --host=${AUTOTOOLS_HOST} ${CONFIGURE_ARGS} ; \
+	CC=kos-cc ${CONFIGURE_DEFS} ./configure --cache-file=${KOS_PORTS}/config.${KOS_GCCVER}.cache --prefix=${KOS_PORTS}/${PORTNAME}/inst --host=${AUTOTOOLS_HOST} ${CONFIGURE_ARGS} ; \
 	$(MAKE) ${MAKE_TARGET} ;
 else ifeq ($(PORT_BUILD), cmake)
 	@if [ -z "${DISTFILE_DIR}" ] ; then \
@@ -61,8 +61,15 @@ force-install: build-stamp $(PREINSTALL)
 	else \
 		cd ${DISTFILE_DIR} ; \
 	fi ; \
+	if [ -z "${CMAKE_OUTSOURCE}" ] ; then \
+		p=. ; \
+	else \
+		p=.. ; \
+	fi ; \
 	if [ -z "${NOCOPY_TARGET}" ] ; then \
-		cp ${TARGET} ../../inst/lib ; \
+		for target in ${TARGET}; do \
+			cp $$p/$$target ../../inst/lib ; \
+		done ; \
 	fi ; \
 	for _file in ${INSTALLED_HDRS}; do \
 		cp $$_file ../../inst/include ; \
@@ -91,8 +98,10 @@ force-install: build-stamp $(PREINSTALL)
 		ln -s ${KOS_PORTS}/${PORTNAME}/inst/include ${KOS_PORTS}/include/${PORTNAME} ; \
 	fi
 
-	@rm -f ${KOS_PORTS}/lib/${TARGET}
-	@ln -s ${KOS_PORTS}/${PORTNAME}/inst/lib/${TARGET} ${KOS_PORTS}/lib/${TARGET}
+	@for target in $(TARGET); do \
+		rm -f ${KOS_PORTS}/lib/$$target ; \
+		ln -s ${KOS_PORTS}/${PORTNAME}/inst/lib/$$target ${KOS_PORTS}/lib/$$target ; \
+	done
 
 	@rm -f ${KOS_PORTS}/examples/${PORTNAME}
 
